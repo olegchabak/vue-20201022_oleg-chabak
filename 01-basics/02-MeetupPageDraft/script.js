@@ -48,19 +48,30 @@ export const app = new Vue({
   el: '#app',
 
   data: {
-    //
+    meetup: null,
+    agendaItemIcons,
+    agendaItemTitles,
   },
-
   mounted() {
     // Требуется получить данные митапа с API
+    this.getMeetup();
   },
 
   computed: {
-    //
+    imageSrc() {
+      return this.meetup ? getMeetupCoverLink(this.meetup) : '';
+    },
+    dateFormatted() {
+      let options = { day: 'numeric', month: 'long', year: 'numeric' };
+      return new Date(this.meetup.date).toLocaleString('ru', options);
+    },
   },
 
   methods: {
-    // Получение данных с API предпочтительнее оформить отдельным методом,
-    // а не писать прямо в mounted()
+    getMeetup() {
+      fetch(`${API_URL}/meetups/${MEETUP_ID}`)
+        .then((response) => response.json())
+        .then((result) => (this.meetup = result));
+    },
   },
 });

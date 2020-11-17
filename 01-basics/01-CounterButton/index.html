@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>CounterButton</title>
+  <style>
+    button {
+      font-size: 20px;
+      padding: 20px 40px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ddd;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Решение -->
+<div id="app">
+  <button @click.prevent="incremento(1)">{{counter}}</button>
+</div>
 
 <script type="module" src="script.js"></script>
 </body>
